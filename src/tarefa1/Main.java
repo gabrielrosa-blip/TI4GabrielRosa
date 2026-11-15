@@ -1,4 +1,4 @@
-import com.sun.security.jgss.GSSUtil;
+package tarefa1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,11 +24,11 @@ public class Main{
             while(sc.hasNextLine()) {
                 String linha = sc.nextLine();
                 String[] campos = linha.split(";");
-                String data = campos[0];
-                String nomeVendedor = campos[1];
-                String objeto = campos[2];
-                int qntVendida = Integer.parseInt(campos[3]);
-                Double precoUnitario = Double.parseDouble(campos[4]);
+                String data = campos[0].trim();
+                String nomeVendedor = campos[1].trim();
+                String objeto = campos[2].trim();
+                int qntVendida = Integer.parseInt(campos[3].trim());
+                Double precoUnitario = Double.parseDouble(campos[4].trim());
 
                 Double totalVendas = qntVendida*precoUnitario;
 
@@ -43,6 +43,7 @@ public class Main{
 
 
             }
+            sc.close();
 
         } catch (FileNotFoundException e){
             System.out.println("Arquivo não existente" + e);
@@ -96,6 +97,11 @@ public class Main{
         System.out.println(String.join(", ", lista));
         System.out.println();
 
+        System.out.println("Quantidade por produto: ");
+        for(Map.Entry<String, Integer> e: quantidadeProduto.entrySet()){
+            System.out.println(e.getKey() + ":" + e.getValue());
+        }
+
         String produtoMaisVendido = "";
         Integer maiorQNT = Integer.MIN_VALUE;
         for(Map.Entry<String, Integer> e: quantidadeProduto.entrySet()){
@@ -104,6 +110,9 @@ public class Main{
                 produtoMaisVendido = e.getKey();
             }
         }
-        System.out.println("Produto mais vendido: " + produtoMaisVendido + " (" + maiorQNT + "unidades)");
+        System.out.println("Produto mais vendido: " + produtoMaisVendido + " (" + maiorQNT + " unidades)");
+
+
+
     }
 }
